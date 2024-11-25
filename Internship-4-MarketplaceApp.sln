@@ -5,9 +5,9 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketplaceApp.Presentation", "MarketplaceApp.Presentation\MarketplaceApp.Presentation.csproj", "{C3932DE5-347A-40DB-91AD-B52B9E6B2ABC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marketplace.Domain", "Marketplace.Domain\Marketplace.Domain.csproj", "{43FEEF15-6A13-4B71-B20C-84B3001E5529}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketplaceApp.Domain", "MarketplaceApp.Domain\MarketplaceApp.Domain.csproj", "{43FEEF15-6A13-4B71-B20C-84B3001E5529}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marketplace.Data", "Marketplace.Data\Marketplace.Data.csproj", "{13AE7816-718E-4CBB-A86D-723929965C45}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketplaceApp.Data", "MarketplaceApp.Data\MarketplaceApp.Data.csproj", "{13AE7816-718E-4CBB-A86D-723929965C45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

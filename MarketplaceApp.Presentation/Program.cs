@@ -1,1 +1,3 @@
-﻿Console.WriteLine("Hello world!");
+﻿using MarketplaceApp.Presentation.Extensions;
+
+ActionExtensions.PrintActions();
