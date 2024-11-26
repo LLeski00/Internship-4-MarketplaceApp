@@ -13,7 +13,8 @@ namespace MarketplaceApp.Presentation.Factories
             var actions = new List<IAction>()
             {
                 new ExitMenuAction(),
-                new DisplayProductsAction(),
+                new DisplayProductsOnSaleAction(),
+                new DisplayPurchasedProductsAction(user),
                 new BuyProductAction(user),
             };
 

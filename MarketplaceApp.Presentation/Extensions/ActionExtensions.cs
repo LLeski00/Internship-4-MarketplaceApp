@@ -84,9 +84,18 @@ namespace MarketplaceApp.Presentation.Extensions
             }
         }
 
+        public static void DisplayPurchasedProducts(Customer user)
+        {
+            foreach (var transaction in MarketplaceRepository.GetAllTransactions().Where(i => i.Customer == user))
+            {
+                var product = ProductRepository.GetById(transaction.ProductId);
+                DisplayProduct(product);
+            }
+        }
+
         public static void DisplayProduct(Product product)
         {
-            Console.WriteLine($"{product.Name}\n\tDescription: {product.Description}\n\tPrice: {product.Price} $\n\tID: {product.Id}\n\tCategory: {product.Category}\n\tAverage rating: {product.AverageRating}\n\tOwner: {product.Owner.FirstName} {product.Owner.LastName}");
+            Console.WriteLine($"{product.Name}\n\tDescription: {product.Description}\n\tPrice: {product.Price} $\n\tID: {product.Id}\n\tCategory: {product.Category}\n\tAverage rating: {product.AverageRating}\n\tVendor: {product.Vendor.FirstName} {product.Vendor.LastName}");
         }
 
         public static Product? FindProduct()

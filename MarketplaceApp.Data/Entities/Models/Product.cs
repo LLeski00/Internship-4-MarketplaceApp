@@ -10,17 +10,17 @@ namespace MarketplaceApp.Data.Entities.Models
         public ProductCategory Category { get; set; }
         public double Price { get; set; }
         public ProductStatus Status { get; set; }
-        public Vendor Owner { get; set; }
+        public Vendor Vendor { get; set; }
         public double AverageRating { get; set; }
 
-        public Product(string name, string description, ProductCategory category, double price, Vendor owner) { 
+        public Product(string name, string description, ProductCategory category, double price, Vendor vendor) { 
             Id = Guid.NewGuid();
             Name = name;
             Description = description;
             Category = category;
             Price = price;
             Status = ProductStatus.OnSale;
-            Owner = owner;
+            Vendor = vendor;
             AverageRating = 1.00;
         }
     }

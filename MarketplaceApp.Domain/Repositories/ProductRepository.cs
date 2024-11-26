@@ -12,6 +12,16 @@ namespace MarketplaceApp.Domain.Repositories
             return Context.Products;
         }
 
+        public static Product? GetById(Guid Id)
+        {
+            foreach (var item in Context.Products) { 
+                if (item.Id == Id)
+                    return item;
+            }
+
+            return null;
+        }
+
         /*public static ResponseResultType Add(User user)
         {
             Context.Users.Add(user);

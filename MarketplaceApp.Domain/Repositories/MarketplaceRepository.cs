@@ -7,6 +7,11 @@ namespace MarketplaceApp.Domain.Repositories
 {
     public static class MarketplaceRepository
     {
+        public static List<Transaction> GetAllTransactions()
+        {
+            return Context.Transactions;
+        }
+
         public static ResponseResultType Buy(Customer user, Product product, double discount)
         {
             if (user.Balance < product.Price)
@@ -15,10 +20,11 @@ namespace MarketplaceApp.Domain.Repositories
             }
 
             user.Balance -= product.Price * (1 - discount);
-            product.Owner.Profit += product.Price;
+            product.Vendor.Profit += product.Price;
             product.Status = ProductStatus.Sold;
+            user.PurchasedProducts.Add(product);
 
-            Context.Transactions.Add(new Transaction(product.Id, user, product.Owner, DateTime.Now));
+            Context.Transactions.Add(new Transaction(product.Id, user, product.Vendor, DateTime.Now));
 
             return ResponseResultType.Success;
         }
@@ -35,11 +41,6 @@ namespace MarketplaceApp.Domain.Repositories
         {
             foreach (var coupon in Context.Coupons)
             {
-                if (coupon.Code == couponCode && coupon.ExpiryDate < DateTime.Now)
-                {
-
-                }
-
                 if (coupon.Code == couponCode)
                 {
                     if (coupon.ExpiryDate < DateTime.Now)
