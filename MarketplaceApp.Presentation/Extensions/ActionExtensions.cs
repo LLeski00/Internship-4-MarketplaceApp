@@ -56,12 +56,12 @@ namespace MarketplaceApp.Presentation.Extensions
             MainMenuFactory.CreateActions().DisplayMenu();
         }
 
-        public static void DisplayCustomerHomeMenu(User user)
+        public static void DisplayCustomerHomeMenu(Customer user)
         {
             CustomerHomeFactory.CreateActions(user).DisplayMenu();
         }
 
-        public static void DisplayVendorHomeMenu(User user)
+        public static void DisplayVendorHomeMenu(Vendor user)
         {
             VendorHomeFactory.CreateActions(user).DisplayMenu();
         }

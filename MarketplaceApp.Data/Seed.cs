@@ -63,18 +63,18 @@ namespace MarketplaceApp.Data
             new Product("Sawed-Off Shotgun", "Compact and powerful shotgun for close quarters", ProductCategory.Weapons, 40.00, (Vendor)Users[11]),
         };
 
-        public static readonly List<Tuple<string, ProductCategory, double, DateTime>> Coupons = new List<Tuple<string, ProductCategory, double, DateTime>>() {
-            Tuple.Create("Valentine", ProductCategory.Pets, 0.1, DateTime.Parse("2025-11-23")),
-            Tuple.Create("Saint Denis", ProductCategory.Electronics, 0.15, DateTime.Parse("2025-12-01")),
-            Tuple.Create("Blackwater", ProductCategory.Clothing, 0.2, DateTime.Parse("2025-11-30")),
-            Tuple.Create("Rhodes", ProductCategory.Food, 0.1, DateTime.Parse("2025-11-28")),
-            Tuple.Create("Annesburg", ProductCategory.Clothing, 0.25, DateTime.Parse("2025-12-05")),
-            Tuple.Create("Van Horn", ProductCategory.Books, 0.1, DateTime.Parse("2025-12-10")),
-            Tuple.Create("Strawberry", ProductCategory.Weapons, 0.3, DateTime.Parse("2025-12-03")),
-            Tuple.Create("Armadillo", ProductCategory.Weapons, 0.2, DateTime.Parse("2025-12-08")),
-            Tuple.Create("Tumbleweed", ProductCategory.Crafts, 0.15, DateTime.Parse("2025-11-29")),
-            Tuple.Create("Lagras", ProductCategory.Supplies, 0.1, DateTime.Parse("2025-12-07")),
-            Tuple.Create("Emerald Ranch", ProductCategory.Food, 0.2, DateTime.Parse("2025-12-12")),
+        public static readonly List<Coupon> Coupons = new List<Coupon>() {
+            new Coupon("Valentine", 0.1, ProductCategory.Pets, DateTime.Parse("2025-11-23")),
+            new Coupon("Saint Denis", 0.15, ProductCategory.Electronics, DateTime.Parse("2025-12-01")),
+            new Coupon("Blackwater", 0.2, ProductCategory.Clothing, DateTime.Parse("2025-11-30")),
+            new Coupon("Rhodes", 0.1, ProductCategory.Food, DateTime.Parse("2025-11-28")),
+            new Coupon("Annesburg", 0.25, ProductCategory.Clothing, DateTime.Parse("2025-12-05")),
+            new Coupon("Van Horn", 0.1, ProductCategory.Books, DateTime.Parse("2025-12-10")),
+            new Coupon("Strawberry", 0.3, ProductCategory.Weapons, DateTime.Parse("2025-12-03")),
+            new Coupon("Armadillo", 0.2, ProductCategory.Weapons, DateTime.Parse("2025-12-08")),
+            new Coupon("Tumbleweed", 0.15, ProductCategory.Crafts, DateTime.Parse("2025-11-29")),
+            new Coupon("Lagras", 0.1, ProductCategory.Supplies, DateTime.Parse("2025-12-07")),
+            new Coupon("Emerald Ranch", 0.2, ProductCategory.Food, DateTime.Parse("2025-12-12")),
         };
     }
 }

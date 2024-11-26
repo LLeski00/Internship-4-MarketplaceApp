@@ -10,10 +10,10 @@ namespace MarketplaceApp.Presentation.Actions.Home.Products
     public class BuyProductAction : IAction
     {
         public string Name { get; set; } = "Buy a product";
-        public User? User { get; set; }
+        public Customer? User { get; set; }
         public int MenuIndex { get; set; }
 
-        public BuyProductAction(User? user) {
+        public BuyProductAction(Customer user) {
             User = user;
         }
 
@@ -21,6 +21,7 @@ namespace MarketplaceApp.Presentation.Actions.Home.Products
         {
             ActionExtensions.DisplayAllProducts();
             var product = ActionExtensions.FindProduct();
+            var discount = 0.00;
 
             while (product == null)
             {
@@ -29,10 +30,29 @@ namespace MarketplaceApp.Presentation.Actions.Home.Products
                 if (!Reader.DoYouWantToContinue())
                     return;
 
-                product = ActionExtensions.FindProduct();
+                Open();
+                return;
             }
 
-            if (MarketplaceRepository.Buy((Customer)User, product) != ResponseResultType.Success)
+            Console.WriteLine("Press y if you have coupon code.");
+
+            if (Console.ReadLine() == "y")
+            {
+                discount = MarketplaceRepository.InputCoupon(product);
+
+                if (discount == 0.00)
+                {
+                    if (Reader.DoYouWantToContinue())
+                    {
+                        Open();
+                        return;
+                    }
+                    else
+                        return;
+                }
+            }
+
+            if (MarketplaceRepository.Buy(User, product, discount) != ResponseResultType.Success)
             {
                 Writer.Error("Insufficient funds.");
 
@@ -48,5 +68,7 @@ namespace MarketplaceApp.Presentation.Actions.Home.Products
             Console.WriteLine("Product successfully purchased!");
             Console.ReadLine();
         }
+
+
     }
 }

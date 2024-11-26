@@ -8,7 +8,7 @@ namespace MarketplaceApp.Presentation.Factories
 {
     public class CustomerHomeFactory
     {
-        public static IList<IAction> CreateActions(User user)
+        public static IList<IAction> CreateActions(Customer user)
         {
             var actions = new List<IAction>()
             {

@@ -29,9 +29,9 @@ namespace MarketplaceApp.Presentation.Actions.MainMenu.Login
             }
 
             if (user is Customer)
-                ActionExtensions.DisplayCustomerHomeMenu(user);
+                ActionExtensions.DisplayCustomerHomeMenu((Customer)user);
             else
-                ActionExtensions.DisplayVendorHomeMenu(user);
+                ActionExtensions.DisplayVendorHomeMenu((Vendor)user);
         }
 
         public User? FindUser()
