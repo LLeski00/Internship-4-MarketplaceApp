@@ -16,5 +16,12 @@ namespace Marketplace.Data.Entities.Models
             Profit = 0.00;
             Products = null;
         }
+
+        public Vendor(string firstName, string lastName, string email, List<Product>? products) : base(firstName, lastName, email)
+        {
+            Profit = 0.00;
+            Products = null;
+            Products = products;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MarketplaceApp.Presentation.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,27 +39,39 @@ namespace MarketplaceApp.Presentation.Helpers
         public static bool TryReadName(string message, out string name)
         {
             Console.WriteLine(message);
-            name = Console.ReadLine() ?? string.Empty;
+            return TryReadName(out name);
+        }
 
-            if (name == string.Empty || !name.All(char.IsLetter) || char.IsLower(name[0]))
+        public static bool TryReadEmail(out string? email)
+        {
+            email = Console.ReadLine();
+
+            if (email == null || email == string.Empty || !email.Contains("@") || !email.Contains("."))
                 return false;
+
+            string[] inputSplitByMonkey = email.Split('@');
+
+            if (inputSplitByMonkey.Length !=2 || inputSplitByMonkey[0].Length<1)
+            {
+                return false;
+            }
+
+            string[] inputSplitByTheDot = email.Split(".");
+
+            if (inputSplitByTheDot.Length != 2 || inputSplitByTheDot[0].Length < 3 || inputSplitByTheDot[1].Length < 2)
+            {
+                return false;
+            }
 
             return true;
         }
 
-        public static bool TryReadLine(string message, out string line)
+        public static bool TryReadEmail(string message, out string? email)
         {
-            line = string.Empty;
-
             Console.WriteLine(message);
-            var input = Console.ReadLine();
-            var isEmpty = string.IsNullOrWhiteSpace(input);
-
-            if (!isEmpty && input is not null)
-                line = input;
-
-            return !isEmpty;
+            return TryReadEmail(out email);
         }
+
         public static bool DoYouWantToContinue()
         {
             Console.WriteLine("If you want to go back to previous page press y");
@@ -67,56 +80,5 @@ namespace MarketplaceApp.Presentation.Helpers
                 return false;
             return true;
         }
-        public static void ReadInput(string message, out string input)
-        {
-            Console.WriteLine(message);
-            input = Console.ReadLine() ?? string.Empty;
-        }
-        public static void ReadInput(out string input)
-        {
-            input = Console.ReadLine() ?? string.Empty;
-        }
-        public static bool NewMessage(out string? message)
-        {
-            Console.WriteLine("Write the message you want to send.");
-            message = Console.ReadLine();
-            if (message == null || string.IsNullOrWhiteSpace(message))
-                return false;
-            return true;
-        }
-        public static string? ReadInput()
-        {
-            Console.WriteLine("Enter your choosen email");
-            var input = Console.ReadLine();
-            string[] inputSplitByMonkey = input.Split('@');
-            if (inputSplitByMonkey.Length !=2)
-            {
-                Writer.Error("Your email should contain just one @");
-                return null;
-            }
-            if (inputSplitByMonkey[0].Length<1)
-            {
-                Writer.HowShouldYourEmailLook(1, "before @");
-                return null;
-            }
-            string[] inputSplitByTheDot = input.Split(".");
-            if (inputSplitByTheDot.Length != 2)
-            {
-                Writer.Error("Your email should contain just one dot");
-                return null;
-            }
-            if (inputSplitByTheDot[0].Length<3)
-            {
-                Writer.HowShouldYourEmailLook(3, "between @ and .");
-                return null;
-            }
-            if (inputSplitByTheDot[1].Length < 2)
-            {
-                Writer.HowShouldYourEmailLook(2, "after .");
-                return null;
-            }
-            return input;
-        }
-
     }
 }

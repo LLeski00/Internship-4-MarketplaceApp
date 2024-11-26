@@ -22,6 +22,9 @@ namespace Marketplace.Data.Entities.Enums
         Jewelry,
         Music,
         Garden,
-        Food
+        Food,
+        Weapons,
+        Supplies,
+        Luxury
     }
 }

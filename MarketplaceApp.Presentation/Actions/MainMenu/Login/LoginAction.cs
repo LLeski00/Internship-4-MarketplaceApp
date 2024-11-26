@@ -22,21 +22,34 @@ namespace MarketplaceApp.Presentation.Actions.MainMenu.Login
         public void Open()
         {
             User? user = FindUser();
+
             while (user == null)
             {
                 Console.WriteLine("The user was not found.");
+
                 if (Reader.DoYouWantToContinue())
                     user = FindUser();
                 else
-                    ActionExtensions.PrintActions();
+                {
+                    ActionExtensions.DisplayMainMenu();
+                    return;
+                }
             }
 
+            if (user is Customer)
+                ActionExtensions.DisplayCustomerHomeMenu();
+            else
+                ActionExtensions.DisplayVendorHomeMenu();
         }
 
         public User? FindUser()
         {
             Console.Clear();
-            Reader.TryReadLine("Enter your email: ", out string email);
+            if (!Reader.TryReadEmail("Enter your email: ", out string? email))
+            {
+                Writer.Error("Email invalid!");
+                return null;
+            }
 
             User? user = UserRepository.GetUser(email);
             return user;

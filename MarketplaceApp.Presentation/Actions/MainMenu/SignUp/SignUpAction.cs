@@ -18,10 +18,6 @@ namespace MarketplaceApp.Presentation.Actions.MainMenu.SignUp
         public User? User { get; set; }
         public int MenuIndex { get; set; }
 
-        public SingUpAction()
-        {
-        }
-
         public void Open()
         {
             do
@@ -48,29 +44,79 @@ namespace MarketplaceApp.Presentation.Actions.MainMenu.SignUp
                     continue;
                 }
 
-                var email = ActionExtensions.CorrectEmailChoice();
+                if (!Reader.TryReadEmail("Enter Email:", out var email))
+                {
+                    Writer.Error("Invalid Email!");
+
+                    if (!Reader.DoYouWantToContinue())
+                        break;
+
+                    continue;
+                }
 
                 if (UserRepository.GetUser(email) != null)
                 {
                     Writer.Error("This email is already taken.");
-                    ActionExtensions.PrintActions();
+
+                    if (!Reader.DoYouWantToContinue())
+                        break;
+
                     continue;
                 }
 
-                var newUser = new User(firstName, lastName, email);
+                if (!Reader.TryReadNumber("Choose:\n1. Customer\n2. Vendor", out var typeOfAccount))
+                {
+                    Writer.Error("Not a number!");
+
+                    if (!Reader.DoYouWantToContinue())
+                        break;
+
+                    continue;
+                }
+
+                User newUser;
+
+                if (typeOfAccount == 1)
+                {
+                    Console.WriteLine("Enter starting balance:");
+
+                    if (!double.TryParse(Console.ReadLine(), out var balance))
+                    {
+                        Writer.Error("Not a number!");
+
+                        if (!Reader.DoYouWantToContinue())
+                            break;
+
+                        continue;
+                    }
+
+                    newUser = new Customer(firstName, lastName, email, balance);
+                }
+                else if (typeOfAccount == 2)
+                    newUser = new Vendor(firstName, lastName, email);
+                else
+                {
+                    Writer.Error("Option doesn't exist!");
+
+                    if (!Reader.DoYouWantToContinue())
+                        break;
+
+                    continue;
+                }
 
                 if (UserRepository.Add(newUser) is ResponseResultType.Success)
                 {
+                    Console.WriteLine("User successfully added");
                     Writer.Write(newUser);
                     Console.ReadKey();
                     break;
                 }
 
-                Console.WriteLine("Failed to add user, no changes saved!");
-                Console.ReadLine();
+                Writer.Error("Failed to add user, no changes saved!");
 
                 if (!Reader.DoYouWantToContinue())
                     break;
+
             } while (true);
         }
     }

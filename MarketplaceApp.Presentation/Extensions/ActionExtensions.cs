@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 using static System.Collections.Specialized.BitVector32;
 using MarketplaceApp.Presentation.Abstractions;
 using MarketplaceApp.Presentation.Factories;
+using MarketplaceApp.Presentation.Actions.Home;
 
 namespace MarketplaceApp.Presentation.Extensions
 {
     public static class ActionExtensions
     {
-        public static void PrintActionsAndOpen(this IList<IAction> actions)
+        public static void DisplayMenu(this IList<IAction> actions)
         {
             const string INVALID_INPUT_MSG = "Please type in number!";
             const string INVALID_ACTION_MSG = "Please select valid action!";
@@ -21,21 +22,27 @@ namespace MarketplaceApp.Presentation.Extensions
             var isExitSelected = false;
             do
             {
-                PrintActions(actions);
+                DisplayActions(actions);
 
                 var isValidInput = int.TryParse(Console.ReadLine(), out var actionIndex);
                 if (!isValidInput)
                 {
-                    PrintErrorMessage(INVALID_INPUT_MSG);
+                    Writer.Error(INVALID_INPUT_MSG);
                     continue;
                 }
 
                 var action = actions.FirstOrDefault(a => a.MenuIndex == actionIndex);
                 if (action is null)
                 {
-                    PrintErrorMessage(INVALID_ACTION_MSG);
+                    Writer.Error(INVALID_ACTION_MSG);
                     continue;
                 }
+
+
+
+                if (action is ExitMenuAction)
+                    isExitSelected = true;
+
                 action.Open();
             } while (!isExitSelected);
         }
@@ -48,11 +55,23 @@ namespace MarketplaceApp.Presentation.Extensions
                 action.MenuIndex = ++index;
             }
         }
-        public static void PrintActions()
+
+        public static void DisplayMainMenu()
         {
-            MainMenuFactory.CreateActions().PrintActionsAndOpen();
+            MainMenuFactory.CreateActions().DisplayMenu();
         }
-        private static void PrintActions(IList<IAction> actions)
+
+        public static void DisplayCustomerHomeMenu()
+        {
+            CustomerHomeFactory.CreateActions().DisplayMenu();
+        }
+
+        public static void DisplayVendorHomeMenu()
+        {
+            VendorHomeFactory.CreateActions().DisplayMenu();
+        }
+
+        private static void DisplayActions(IList<IAction> actions)
         {
             Console.Clear();
 
@@ -60,53 +79,6 @@ namespace MarketplaceApp.Presentation.Extensions
             {
                 Console.WriteLine($"{action.MenuIndex}. {action.Name}");
             }
-        }
-
-        private static void PrintErrorMessage(string message)
-        {
-            Console.WriteLine(message);
-            Console.ReadKey();
-        }
-
-        public static string? EmailChoice()
-        {
-            Console.Clear();
-            string? email = Reader.ReadInput();
-            return email;
-        }
-        public static string? IsCorrectPassword()
-        {
-            Reader.TryReadLine("Enter your choosen password", out string password);
-            Reader.TryReadLine("Enter your choosen password again", out string secondTryPassword);
-            if (password == secondTryPassword)
-                return password;
-            return null;
-        }
-        public static string CorrectPasswordChoice()
-        {
-            string? password = IsCorrectPassword();
-            while (password == null)
-            {
-                bool cont = Reader.DoYouWantToContinue();
-                if (cont)
-                    password = IsCorrectPassword();
-                else
-                    PrintActions();
-            }
-            return password;
-        }
-        public static string CorrectEmailChoice()
-        {
-            string? email = Reader.ReadInput();
-            while (email == null)
-            {
-                bool cont = Reader.DoYouWantToContinue();
-                if (cont)
-                    email = EmailChoice();
-                else
-                    PrintActions();
-            }
-            return email;
         }
     }
 }

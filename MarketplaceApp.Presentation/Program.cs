@@ -1,3 +1,3 @@
 ﻿using MarketplaceApp.Presentation.Extensions;
 
-ActionExtensions.PrintActions();
+ActionExtensions.DisplayMainMenu();

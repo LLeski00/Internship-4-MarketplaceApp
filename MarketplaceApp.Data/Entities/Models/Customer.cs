@@ -12,9 +12,9 @@ namespace Marketplace.Data.Entities.Models
         public List<Product>? PurchasedProducts { get; set; }
         public List<Product>? FavoriteProducts { get; set; }
 
-        public Customer(string firstName, string lastName, string email) : base(firstName, lastName, email)
+        public Customer(string firstName, string lastName, string email, double balance) : base(firstName, lastName, email)
         {
-            Balance = 100.00;
+            Balance = balance;
             PurchasedProducts = null;
             FavoriteProducts = null;
         }

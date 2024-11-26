@@ -18,10 +18,11 @@ namespace Marketplace.Data.Entities.Models
         public Vendor Owner { get; set; }
         public double AverageRating { get; set; }
 
-        public Product(string name, string description, double price, Vendor owner) { 
+        public Product(string name, string description, ProductCategory category, double price, Vendor owner) { 
             Id = Guid.NewGuid();
             Name = name;
             Description = description;
+            Category = category;
             Price = price;
             Status = ProductStatus.OnSale;
             Owner = owner;
