@@ -1,12 +1,4 @@
-﻿using MarketplaceApp.Presentation.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace MarketplaceApp.Presentation.Helpers
+﻿namespace MarketplaceApp.Presentation.Helpers
 {
     public static class Reader
     {

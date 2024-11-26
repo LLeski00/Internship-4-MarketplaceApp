@@ -1,14 +1,11 @@
-﻿using Marketplace.Data.Entities.Models;
+﻿using MarketplaceApp.Data.Entities.Models;
 using MarketplaceApp.Presentation.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Collections.Specialized.BitVector32;
 using MarketplaceApp.Presentation.Abstractions;
 using MarketplaceApp.Presentation.Factories;
 using MarketplaceApp.Presentation.Actions.Home;
+using MarketplaceApp.Data.Entities.Enums;
+using MarketplaceApp.Domain.Repositories;
+using static MarketplaceApp.Data.Marketplace;
 
 namespace MarketplaceApp.Presentation.Extensions
 {
@@ -38,8 +35,6 @@ namespace MarketplaceApp.Presentation.Extensions
                     continue;
                 }
 
-
-
                 if (action is ExitMenuAction)
                     isExitSelected = true;
 
@@ -61,14 +56,14 @@ namespace MarketplaceApp.Presentation.Extensions
             MainMenuFactory.CreateActions().DisplayMenu();
         }
 
-        public static void DisplayCustomerHomeMenu()
+        public static void DisplayCustomerHomeMenu(User user)
         {
-            CustomerHomeFactory.CreateActions().DisplayMenu();
+            CustomerHomeFactory.CreateActions(user).DisplayMenu();
         }
 
-        public static void DisplayVendorHomeMenu()
+        public static void DisplayVendorHomeMenu(User user)
         {
-            VendorHomeFactory.CreateActions().DisplayMenu();
+            VendorHomeFactory.CreateActions(user).DisplayMenu();
         }
 
         private static void DisplayActions(IList<IAction> actions)
@@ -79,6 +74,35 @@ namespace MarketplaceApp.Presentation.Extensions
             {
                 Console.WriteLine($"{action.MenuIndex}. {action.Name}");
             }
+        }
+
+        public static void DisplayAllProducts()
+        {
+            foreach (var product in ProductRepository.GetAll().Where(i => i.Status == ProductStatus.OnSale))
+            {
+                DisplayProduct(product);
+            }
+        }
+
+        public static void DisplayProduct(Product product)
+        {
+            Console.WriteLine($"{product.Name}\n\tDescription: {product.Description}\n\tPrice: {product.Price} $\n\tID: {product.Id}\n\tCategory: {product.Category}\n\tAverage rating: {product.AverageRating}\n\tOwner: {product.Owner.FirstName} {product.Owner.LastName}");
+        }
+
+        public static Product? FindProduct()
+        {
+            Console.WriteLine("Enter the ID of the product:");
+            var id = Console.ReadLine();
+
+            foreach (var product in Context.Products)
+            {
+                if (product.Id.ToString() == id)
+                {
+                    return product;
+                }
+            }
+
+            return null;
         }
     }
 }

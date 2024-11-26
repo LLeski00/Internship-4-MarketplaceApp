@@ -1,13 +1,8 @@
-﻿using Marketplace.Data.Entities.Models;
-using Marketplace.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MarketplaceApp.Domain.Enums;
+using MarketplaceApp.Data.Entities.Models;
 using static MarketplaceApp.Data.Marketplace;
 
-namespace Marketplace.Domain.Repositories
+namespace MarketplaceApp.Domain.Repositories
 {
     public static class UserRepository
     {
@@ -29,20 +24,9 @@ namespace Marketplace.Domain.Repositories
             return ResponseResultType.Success;
         }
 
-        /*public static ResponseResultType Delete(int id)
-        {
-            var customerToDelete = GetById(id);
-            if (customerToDelete is null)
-            {
-                return ResponseResultType.NotFound;
-            }
+        
 
-            Context.Users.Remove(customerToDelete);
-
-            return SaveChanges();
-        }
-
-        public static ResponseResultType Update(User user, int id)
+        /*public static ResponseResultType Update(User user, int id)
         {
             var userToUpdate = GetById(id);
             if (userToUpdate is null)

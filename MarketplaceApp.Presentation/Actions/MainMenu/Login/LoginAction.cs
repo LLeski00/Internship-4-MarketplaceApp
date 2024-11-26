@@ -1,22 +1,14 @@
-﻿using Marketplace.Data.Entities.Models;
-using Marketplace.Domain.Repositories;
-using MarketplaceApp.Presentation.Abstractions;
+﻿using MarketplaceApp.Presentation.Abstractions;
 using MarketplaceApp.Presentation.Extensions;
 using MarketplaceApp.Presentation.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Collections.Specialized.BitVector32;
+using MarketplaceApp.Data.Entities.Models;
+using MarketplaceApp.Domain.Repositories;
 
 namespace MarketplaceApp.Presentation.Actions.MainMenu.Login
 {
     public class LoginAction : IAction
     {
         public string Name { get; set; } = "Log in";
-        public User? User { get; set; }
         public int MenuIndex { get; set; }
 
         public void Open()
@@ -37,9 +29,9 @@ namespace MarketplaceApp.Presentation.Actions.MainMenu.Login
             }
 
             if (user is Customer)
-                ActionExtensions.DisplayCustomerHomeMenu();
+                ActionExtensions.DisplayCustomerHomeMenu(user);
             else
-                ActionExtensions.DisplayVendorHomeMenu();
+                ActionExtensions.DisplayVendorHomeMenu(user);
         }
 
         public User? FindUser()

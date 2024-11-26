@@ -1,20 +1,13 @@
-﻿using Marketplace.Data.Entities.Enums;
-using Marketplace.Data.Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using MarketplaceApp.Data.Entities.Enums;
+using MarketplaceApp.Data.Entities.Models;
 
-namespace Marketplace.Data
+namespace MarketplaceApp.Data
 {
     public static class Seed
     {
         public static readonly List<User> Users = new List<User>() {
             new Customer("Arthur", "Morgan", "arthurmorgan@gmail.com", 250.55),
-            new Vendor("John", "Marston", "adamsandler@gmail.com"),
+            new Vendor("John", "Marston", "johnmarston@gmail.com"),
             new Customer("Abigail", "Roberts", "abigail.roberts@gmail.com", 150.30),
             new Vendor("Dutch", "Van der Linde", "dutchvanderlinde@gmail.com"),
             new Customer("Jack", "Marston", "jack.marston@gmail.com", 85.75),
@@ -68,7 +61,20 @@ namespace Marketplace.Data
             new Product("Pearson’s Stew", "A hearty stew cooked by Pearson", ProductCategory.Food, 4.75, (Vendor)Users[7]),
             new Product("Shire Horse", "A dependable and strong workhorse", ProductCategory.Pets, 150.00, (Vendor)Users[9]),
             new Product("Sawed-Off Shotgun", "Compact and powerful shotgun for close quarters", ProductCategory.Weapons, 40.00, (Vendor)Users[11]),
+        };
 
+        public static readonly List<Tuple<string, ProductCategory, double, DateTime>> Coupons = new List<Tuple<string, ProductCategory, double, DateTime>>() {
+            Tuple.Create("Valentine", ProductCategory.Pets, 0.1, DateTime.Parse("2025-11-23")),
+            Tuple.Create("Saint Denis", ProductCategory.Electronics, 0.15, DateTime.Parse("2025-12-01")),
+            Tuple.Create("Blackwater", ProductCategory.Clothing, 0.2, DateTime.Parse("2025-11-30")),
+            Tuple.Create("Rhodes", ProductCategory.Food, 0.1, DateTime.Parse("2025-11-28")),
+            Tuple.Create("Annesburg", ProductCategory.Clothing, 0.25, DateTime.Parse("2025-12-05")),
+            Tuple.Create("Van Horn", ProductCategory.Books, 0.1, DateTime.Parse("2025-12-10")),
+            Tuple.Create("Strawberry", ProductCategory.Weapons, 0.3, DateTime.Parse("2025-12-03")),
+            Tuple.Create("Armadillo", ProductCategory.Weapons, 0.2, DateTime.Parse("2025-12-08")),
+            Tuple.Create("Tumbleweed", ProductCategory.Crafts, 0.15, DateTime.Parse("2025-11-29")),
+            Tuple.Create("Lagras", ProductCategory.Supplies, 0.1, DateTime.Parse("2025-12-07")),
+            Tuple.Create("Emerald Ranch", ProductCategory.Food, 0.2, DateTime.Parse("2025-12-12")),
         };
     }
 }

@@ -1,21 +1,14 @@
-﻿using Marketplace.Data.Entities.Models;
-using Marketplace.Domain.Enums;
-using Marketplace.Domain.Repositories;
+﻿using MarketplaceApp.Data.Entities.Models;
+using MarketplaceApp.Domain.Enums;
+using MarketplaceApp.Domain.Repositories;
 using MarketplaceApp.Presentation.Abstractions;
-using MarketplaceApp.Presentation.Extensions;
 using MarketplaceApp.Presentation.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MarketplaceApp.Presentation.Actions.MainMenu.SignUp
 {
     public class SingUpAction : IAction
     {
         public string Name { get; set; } = "Sign up";
-        public User? User { get; set; }
         public int MenuIndex { get; set; }
 
         public void Open()
@@ -107,7 +100,6 @@ namespace MarketplaceApp.Presentation.Actions.MainMenu.SignUp
                 if (UserRepository.Add(newUser) is ResponseResultType.Success)
                 {
                     Console.WriteLine("User successfully added");
-                    Writer.Write(newUser);
                     Console.ReadKey();
                     break;
                 }

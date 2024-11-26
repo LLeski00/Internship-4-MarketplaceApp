@@ -1,10 +1,6 @@
-﻿using Marketplace.Data.Entities.Models;
-using Marketplace.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MarketplaceApp.Data.Entities.Enums;
+using MarketplaceApp.Data.Entities.Models;
+using MarketplaceApp.Domain.Enums;
 using static MarketplaceApp.Data.Marketplace;
 
 namespace MarketplaceApp.Domain.Repositories

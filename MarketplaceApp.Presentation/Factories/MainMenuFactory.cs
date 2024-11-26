@@ -1,14 +1,8 @@
-﻿using Marketplace.Domain.Repositories;
-using MarketplaceApp.Presentation.Abstractions;
+﻿using MarketplaceApp.Presentation.Abstractions;
 using MarketplaceApp.Presentation.Actions.MainMenu;
 using MarketplaceApp.Presentation.Actions.MainMenu.Login;
 using MarketplaceApp.Presentation.Actions.MainMenu.SignUp;
 using MarketplaceApp.Presentation.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MarketplaceApp.Presentation.Factories
 {

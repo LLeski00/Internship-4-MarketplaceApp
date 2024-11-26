@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Marketplace.Domain.Enums
+﻿namespace MarketplaceApp.Domain.Enums
 {
     public enum ResponseResultType
     {
@@ -12,6 +6,7 @@ namespace Marketplace.Domain.Enums
         NotFound,
         AlreadyExists,
         NoChanges,
-        ValidationError
+        ValidationError,
+        InsufficientFunds
     }
 }

@@ -1,11 +1,6 @@
-﻿using Marketplace.Data.Entities.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MarketplaceApp.Data.Entities.Enums;
 
-namespace Marketplace.Data.Entities.Models
+namespace MarketplaceApp.Data.Entities.Models
 {
     public class Product
     {
