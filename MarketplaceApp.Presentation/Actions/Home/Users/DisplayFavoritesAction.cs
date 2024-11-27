@@ -1,6 +1,6 @@
 ﻿using MarketplaceApp.Data.Entities.Models;
+using MarketplaceApp.Domain.Repositories;
 using MarketplaceApp.Presentation.Abstractions;
-using MarketplaceApp.Presentation.Extensions;
 using MarketplaceApp.Presentation.Helpers;
 
 namespace MarketplaceApp.Presentation.Actions.Home.Users
@@ -19,7 +19,7 @@ namespace MarketplaceApp.Presentation.Actions.Home.Users
         public void Open()
         {
             Writer.ConsoleClear();
-            ActionExtensions.DisplayFavoriteProducts(User);
+            ProductRepository.DisplayFavoriteProducts(User);
             Console.ReadLine();
         }
     }

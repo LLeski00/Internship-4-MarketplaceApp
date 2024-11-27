@@ -1,6 +1,6 @@
 ﻿using MarketplaceApp.Data.Entities.Models;
+using MarketplaceApp.Domain.Repositories;
 using MarketplaceApp.Presentation.Abstractions;
-using MarketplaceApp.Presentation.Extensions;
 using MarketplaceApp.Presentation.Helpers;
 
 namespace MarketplaceApp.Presentation.Actions.Home.Users
@@ -19,8 +19,8 @@ namespace MarketplaceApp.Presentation.Actions.Home.Users
         public void Open()
         {
             Writer.ConsoleClear();
-            ActionExtensions.DisplayAllProducts();
-            var product = ActionExtensions.FindProduct();
+            ProductRepository.DisplayAllProducts();
+            var product = ProductRepository.FindProduct();
 
             while (product == null)
             {

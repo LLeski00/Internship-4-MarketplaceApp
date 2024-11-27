@@ -1,5 +1,4 @@
-﻿using MarketplaceApp.Data.Entities.Models;
-using MarketplaceApp.Presentation.Abstractions;
+﻿using MarketplaceApp.Presentation.Abstractions;
 
 namespace MarketplaceApp.Presentation.Actions.MainMenu
 {

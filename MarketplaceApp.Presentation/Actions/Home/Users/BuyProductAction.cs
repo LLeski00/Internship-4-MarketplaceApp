@@ -3,7 +3,6 @@ using MarketplaceApp.Data.Entities.Models;
 using MarketplaceApp.Domain.Enums;
 using MarketplaceApp.Domain.Repositories;
 using MarketplaceApp.Presentation.Abstractions;
-using MarketplaceApp.Presentation.Extensions;
 using MarketplaceApp.Presentation.Helpers;
 
 namespace MarketplaceApp.Presentation.Actions.Home.Products
@@ -20,9 +19,10 @@ namespace MarketplaceApp.Presentation.Actions.Home.Products
 
         public void Open()
         {
-            ActionExtensions.DisplayAllProducts();
+            ProductRepository.DisplayAllProducts();
+            Console.WriteLine($"\n\tDISCLAIMER\nMarketplace provision of {MarketplaceRepository.GetProvision() * 100}% is not included in the price.");
             Console.WriteLine($"Your balance: {User.Balance:F2} $");
-            var product = ActionExtensions.FindProduct();
+            var product = ProductRepository.FindProduct();
             var discount = 0.00;
 
             while (product == null)

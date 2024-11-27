@@ -1,6 +1,5 @@
 ﻿using MarketplaceApp.Data.Entities.Enums;
 using MarketplaceApp.Data.Entities.Models;
-using MarketplaceApp.Domain.Enums;
 using static MarketplaceApp.Data.Marketplace;
 
 namespace MarketplaceApp.Domain.Repositories
@@ -22,51 +21,60 @@ namespace MarketplaceApp.Domain.Repositories
             return null;
         }
 
-        /*public static ResponseResultType Add(User user)
+        public static void DisplayAllProducts()
         {
-            Context.Users.Add(user);
-
-            return ResponseResultType.Success;
-        }*/
-
-        /*public static ResponseResultType Delete(int id)
-        {
-            var customerToDelete = GetById(id);
-            if (customerToDelete is null)
+            if (GetAll().Where(i => i.Status == ProductStatus.OnSale) == null || GetAll().Where(i => i.Status == ProductStatus.OnSale).Count() == 0)
             {
-                return ResponseResultType.NotFound;
+                Console.WriteLine("No products!");
+                return;
             }
 
-            Context.Users.Remove(customerToDelete);
-
-            return SaveChanges();
+            foreach (var product in GetAll().Where(i => i.Status == ProductStatus.OnSale))
+            {
+                DisplayProduct(product);
+            }
         }
 
-        public static ResponseResultType Update(User user, int id)
+        public static void DisplayPurchasedProducts(Customer user)
         {
-            var userToUpdate = GetById(id);
-            if (userToUpdate is null)
+            if (user.PurchasedProducts == null || user.PurchasedProducts.Count() == 0)
             {
-                return ResponseResultType.NotFound;
+                Console.WriteLine("No products!");
+                return;
             }
 
-            userToUpdate.Email = user.Email;
-            userToUpdate.Password = user.Password;
-
-            return SaveChanges();
+            foreach (var product in user.PurchasedProducts)
+            {
+                DisplayProduct(product);
+            }
         }
-        public static ResponseResultType Update(User user, int id, bool isAdmin)
+
+        public static void DisplayFavoriteProducts(Customer user)
         {
-            var userToUpdate = GetById(id);
-            if (userToUpdate is null)
+            if (user.FavoriteProducts == null || user.FavoriteProducts.Count() == 0)
             {
-                return ResponseResultType.NotFound;
+                Console.WriteLine("No products!");
+                return;
             }
 
-            userToUpdate.Email = user.Email;
-            userToUpdate.Password = user.Password;
-            userToUpdate.IsAdmin = isAdmin;
-            return SaveChanges();
-        }*/
+            foreach (var product in user.FavoriteProducts)
+            {
+                DisplayProduct(product);
+            }
+        }
+
+        public static void DisplayProduct(Product product)
+        {
+            Console.WriteLine($"{product.Name}\n\tDescription: {product.Description}\n\tPrice: {product.Price} $\n\tID: {product.Id}\n\tCategory: {product.Category}\n\tAverage rating: {product.AverageRating}\n\tVendor: {product.Vendor.FirstName} {product.Vendor.LastName}");
+        }
+
+        public static Product? FindProduct()
+        {
+            Console.WriteLine("Enter the ID of the product:");
+            if (!Guid.TryParse(Console.ReadLine(), out var id))
+                return null;
+
+            return GetById(id);
+        }
     }
 }

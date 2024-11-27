@@ -19,6 +19,7 @@ namespace MarketplaceApp.Presentation.Factories
                 new DisplayFavoritesAction(user),
                 new AddToFavoritesAction(user),
                 new BuyProductAction(user),
+                new ReturnProductAction(user)
             };
 
             actions.SetActionIndexes();

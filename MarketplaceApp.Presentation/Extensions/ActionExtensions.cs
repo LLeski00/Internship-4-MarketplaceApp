@@ -5,7 +5,6 @@ using MarketplaceApp.Presentation.Factories;
 using MarketplaceApp.Presentation.Actions.Home;
 using MarketplaceApp.Data.Entities.Enums;
 using MarketplaceApp.Domain.Repositories;
-using static MarketplaceApp.Data.Marketplace;
 
 namespace MarketplaceApp.Presentation.Extensions
 {
@@ -76,68 +75,6 @@ namespace MarketplaceApp.Presentation.Extensions
             }
         }
 
-        public static void DisplayAllProducts()
-        {
-            if (ProductRepository.GetAll().Where(i => i.Status == ProductStatus.OnSale) == null || ProductRepository.GetAll().Where(i => i.Status == ProductStatus.OnSale).Count() == 0)
-            {
-                Console.WriteLine("No products!");
-                return;
-            }
-
-            foreach (var product in ProductRepository.GetAll().Where(i => i.Status == ProductStatus.OnSale))
-            {
-                DisplayProduct(product);
-            }
-        }
-
-        public static void DisplayPurchasedProducts(Customer user)
-        {
-            if (MarketplaceRepository.GetAllTransactions().Where(i => i.Customer == user) == null || MarketplaceRepository.GetAllTransactions().Where(i => i.Customer == user).Count() == 0)
-            {
-                Console.WriteLine("No products!");
-                return;
-            }
-
-            foreach (var transaction in MarketplaceRepository.GetAllTransactions().Where(i => i.Customer == user))
-            {
-                var product = ProductRepository.GetById(transaction.ProductId);
-                DisplayProduct(product);
-            }
-        }
-
-        public static void DisplayFavoriteProducts(Customer user)
-        {
-            if (user.FavoriteProducts == null || user.FavoriteProducts.Count() == 0)
-            {
-                Console.WriteLine("No products!");
-                return;
-            }
-
-            foreach (var product in user.FavoriteProducts)
-            {
-                DisplayProduct(product);
-            }
-        }
-
-        public static void DisplayProduct(Product product)
-        {
-            Console.WriteLine($"{product.Name}\n\tDescription: {product.Description}\n\tPrice: {product.Price} $\n\tID: {product.Id}\n\tCategory: {product.Category}\n\tAverage rating: {product.AverageRating}\n\tVendor: {product.Vendor.FirstName} {product.Vendor.LastName}");
-        }
-
-        public static Product? FindProduct()
-        {
-            Console.WriteLine("Enter the ID of the product:");
-            var id = Console.ReadLine();
-
-            foreach (var product in Context.Products)
-            {
-                if (product.Id.ToString() == id)
-                {
-                    return product;
-                }
-            }
-
-            return null;
-        }
+        
     }
 }

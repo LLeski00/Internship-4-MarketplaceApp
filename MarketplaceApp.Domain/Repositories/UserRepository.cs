@@ -23,34 +23,5 @@ namespace MarketplaceApp.Domain.Repositories
 
             return ResponseResultType.Success;
         }
-
-        
-
-        /*public static ResponseResultType Update(User user, int id)
-        {
-            var userToUpdate = GetById(id);
-            if (userToUpdate is null)
-            {
-                return ResponseResultType.NotFound;
-            }
-
-            userToUpdate.Email = user.Email;
-            userToUpdate.Password = user.Password;
-
-            return SaveChanges();
-        }
-        public static ResponseResultType Update(User user, int id, bool isAdmin)
-        {
-            var userToUpdate = GetById(id);
-            if (userToUpdate is null)
-            {
-                return ResponseResultType.NotFound;
-            }
-
-            userToUpdate.Email = user.Email;
-            userToUpdate.Password = user.Password;
-            userToUpdate.IsAdmin = isAdmin;
-            return SaveChanges();
-        }*/
     }
 }
