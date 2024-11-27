@@ -19,6 +19,8 @@ namespace MarketplaceApp.Presentation.Extensions
             var isExitSelected = false;
             do
             {
+                Writer.ConsoleClear();
+                Console.WriteLine("\tMarketplace App\n");
                 DisplayActions(actions);
 
                 var isValidInput = int.TryParse(Console.ReadLine(), out var actionIndex);
@@ -68,8 +70,6 @@ namespace MarketplaceApp.Presentation.Extensions
 
         private static void DisplayActions(IList<IAction> actions)
         {
-            Console.Clear();
-
             foreach (var action in actions)
             {
                 Console.WriteLine($"{action.MenuIndex}. {action.Name}");
@@ -78,6 +78,12 @@ namespace MarketplaceApp.Presentation.Extensions
 
         public static void DisplayAllProducts()
         {
+            if (ProductRepository.GetAll().Where(i => i.Status == ProductStatus.OnSale) == null || ProductRepository.GetAll().Where(i => i.Status == ProductStatus.OnSale).Count() == 0)
+            {
+                Console.WriteLine("No products!");
+                return;
+            }
+
             foreach (var product in ProductRepository.GetAll().Where(i => i.Status == ProductStatus.OnSale))
             {
                 DisplayProduct(product);
@@ -86,9 +92,29 @@ namespace MarketplaceApp.Presentation.Extensions
 
         public static void DisplayPurchasedProducts(Customer user)
         {
+            if (MarketplaceRepository.GetAllTransactions().Where(i => i.Customer == user) == null || MarketplaceRepository.GetAllTransactions().Where(i => i.Customer == user).Count() == 0)
+            {
+                Console.WriteLine("No products!");
+                return;
+            }
+
             foreach (var transaction in MarketplaceRepository.GetAllTransactions().Where(i => i.Customer == user))
             {
                 var product = ProductRepository.GetById(transaction.ProductId);
+                DisplayProduct(product);
+            }
+        }
+
+        public static void DisplayFavoriteProducts(Customer user)
+        {
+            if (user.FavoriteProducts == null || user.FavoriteProducts.Count() == 0)
+            {
+                Console.WriteLine("No products!");
+                return;
+            }
+
+            foreach (var product in user.FavoriteProducts)
+            {
                 DisplayProduct(product);
             }
         }

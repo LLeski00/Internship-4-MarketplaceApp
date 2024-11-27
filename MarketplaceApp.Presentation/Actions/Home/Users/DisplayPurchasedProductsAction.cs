@@ -2,13 +2,8 @@
 using MarketplaceApp.Presentation.Abstractions;
 using MarketplaceApp.Presentation.Extensions;
 using MarketplaceApp.Presentation.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MarketplaceApp.Presentation.Actions.Home.Products
+namespace MarketplaceApp.Presentation.Actions.Home.Users
 {
     public class DisplayPurchasedProductsAction : IAction
     {

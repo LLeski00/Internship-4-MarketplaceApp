@@ -1,4 +1,5 @@
-﻿using MarketplaceApp.Data.Entities.Enums;
+﻿using MarketplaceApp.Data;
+using MarketplaceApp.Data.Entities.Enums;
 using MarketplaceApp.Data.Entities.Models;
 using MarketplaceApp.Domain.Enums;
 using static MarketplaceApp.Data.Marketplace;
@@ -20,7 +21,7 @@ namespace MarketplaceApp.Domain.Repositories
             }
 
             user.Balance -= product.Price * (1 - discount);
-            product.Vendor.Profit += product.Price;
+            product.Vendor.Profit += product.Price - product.Price * Context.Provision;
             product.Status = ProductStatus.Sold;
             user.PurchasedProducts.Add(product);
 
@@ -55,7 +56,7 @@ namespace MarketplaceApp.Domain.Repositories
                         return 0.00;
                     }
 
-                    Console.WriteLine($"Successfully redeemed coupon! Discount: {coupon.Discount * 100} %");
+                    Console.WriteLine($"Successfully redeemed coupon! Discount: {coupon.Discount * 100} %, New price: {product.Price * (1 - coupon.Discount)} $");
                     return coupon.Discount;
                 }
             }

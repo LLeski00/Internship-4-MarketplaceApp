@@ -1,5 +1,4 @@
-﻿using MarketplaceApp.Data.Entities.Enums;
-using MarketplaceApp.Data.Entities.Models;
+﻿using MarketplaceApp.Data.Entities.Models;
 
 namespace MarketplaceApp.Data
 {
@@ -11,6 +10,7 @@ namespace MarketplaceApp.Data
             public static List<Product> Products { get; set; } = Seed.Products;
             public static List<Coupon> Coupons = Seed.Coupons;
             public static List<Transaction> Transactions = new List<Transaction>();
+            public static double Provision { get; set; } = 0.05;
         }
     }
 }

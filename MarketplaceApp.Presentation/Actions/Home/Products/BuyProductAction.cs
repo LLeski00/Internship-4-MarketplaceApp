@@ -1,4 +1,5 @@
-﻿using MarketplaceApp.Data.Entities.Models;
+﻿using MarketplaceApp.Data.Entities.Enums;
+using MarketplaceApp.Data.Entities.Models;
 using MarketplaceApp.Domain.Enums;
 using MarketplaceApp.Domain.Repositories;
 using MarketplaceApp.Presentation.Abstractions;
@@ -10,7 +11,7 @@ namespace MarketplaceApp.Presentation.Actions.Home.Products
     public class BuyProductAction : IAction
     {
         public string Name { get; set; } = "Buy a product";
-        public Customer? User { get; set; }
+        public Customer User { get; set; }
         public int MenuIndex { get; set; }
 
         public BuyProductAction(Customer user) {
@@ -20,6 +21,7 @@ namespace MarketplaceApp.Presentation.Actions.Home.Products
         public void Open()
         {
             ActionExtensions.DisplayAllProducts();
+            Console.WriteLine($"Your balance: {User.Balance:F2} $");
             var product = ActionExtensions.FindProduct();
             var discount = 0.00;
 
@@ -27,10 +29,19 @@ namespace MarketplaceApp.Presentation.Actions.Home.Products
             {
                 Writer.Error("Product not found!");
 
-                if (!Reader.DoYouWantToContinue())
-                    return;
+                if (Reader.DoYouWantToContinue())
+                    Open();
 
-                Open();
+                return;
+            }
+
+            if (product.Status == ProductStatus.Sold) 
+            {
+                Writer.Error("Product already sold!");
+
+                if (Reader.DoYouWantToContinue())
+                    Open();
+
                 return;
             }
 
@@ -43,12 +54,9 @@ namespace MarketplaceApp.Presentation.Actions.Home.Products
                 if (discount == 0.00)
                 {
                     if (Reader.DoYouWantToContinue())
-                    {
                         Open();
-                        return;
-                    }
-                    else
-                        return;
+
+                    return;
                 }
             }
 
@@ -56,13 +64,10 @@ namespace MarketplaceApp.Presentation.Actions.Home.Products
             {
                 Writer.Error("Insufficient funds.");
 
-                if (!Reader.DoYouWantToContinue())
-                    return;
-                else
-                {
+                if (Reader.DoYouWantToContinue())
                     Open();
-                    return;
-                }
+
+                return;
             }
 
             Console.WriteLine("Product successfully purchased!");
