@@ -3,7 +3,7 @@ using MarketplaceApp.Domain.Repositories;
 using MarketplaceApp.Presentation.Abstractions;
 using MarketplaceApp.Presentation.Helpers;
 
-namespace MarketplaceApp.Presentation.Actions.Home.Users
+namespace MarketplaceApp.Presentation.Actions.Home.Customers
 {
     public class ReturnProductAction : IAction
     {

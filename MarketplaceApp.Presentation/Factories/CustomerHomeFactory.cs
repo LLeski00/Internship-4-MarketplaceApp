@@ -3,7 +3,7 @@ using MarketplaceApp.Presentation.Actions.Home.Products;
 using MarketplaceApp.Presentation.Actions.Home;
 using MarketplaceApp.Presentation.Extensions;
 using MarketplaceApp.Data.Entities.Models;
-using MarketplaceApp.Presentation.Actions.Home.Users;
+using MarketplaceApp.Presentation.Actions.Home.Customers;
 
 namespace MarketplaceApp.Presentation.Factories
 {

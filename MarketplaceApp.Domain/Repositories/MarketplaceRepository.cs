@@ -40,7 +40,6 @@ namespace MarketplaceApp.Domain.Repositories
         public static void Return(Customer user, Product product)
         {
             var pricePaid = GetMostRecentTransaction(user, product).PricePaid;
-            Console.WriteLine(pricePaid);
             user.Balance += pricePaid * 0.8;
             user.PurchasedProducts.Remove(product);
             product.Vendor.Profit -= pricePaid * 0.85;

@@ -1,4 +1,6 @@
-﻿namespace MarketplaceApp.Presentation.Helpers
+﻿using MarketplaceApp.Domain.Repositories;
+
+namespace MarketplaceApp.Presentation.Helpers
 {
     public static class Reader
     {
@@ -62,6 +64,31 @@
         {
             Console.WriteLine(message);
             return TryReadEmail(out email);
+        }
+
+        public static bool TryReadProductCategory(out string? category)
+        {
+            category = Console.ReadLine();
+
+            if (category == null || category == string.Empty)
+                return false;
+
+            foreach (var item in ProductRepository.GetProductCategories())
+            {
+                if (category.Equals(item.ToString(), StringComparison.OrdinalIgnoreCase))
+                {
+                    category = item.ToString();
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static bool TryReadProductCategory(string message, out string? category)
+        {
+            Console.WriteLine(message);
+            return TryReadProductCategory(out category);
         }
 
         public static bool DoYouWantToContinue()

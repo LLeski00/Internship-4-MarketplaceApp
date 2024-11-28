@@ -5,7 +5,7 @@ using MarketplaceApp.Domain.Repositories;
 using MarketplaceApp.Presentation.Abstractions;
 using MarketplaceApp.Presentation.Helpers;
 
-namespace MarketplaceApp.Presentation.Actions.Home.Products
+namespace MarketplaceApp.Presentation.Actions.Home.Customers
 {
     public class BuyProductAction : IAction
     {

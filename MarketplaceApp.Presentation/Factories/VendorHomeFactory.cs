@@ -1,6 +1,7 @@
 ﻿using MarketplaceApp.Data.Entities.Models;
 using MarketplaceApp.Presentation.Abstractions;
 using MarketplaceApp.Presentation.Actions.Home;
+using MarketplaceApp.Presentation.Actions.Home.Vendors;
 using MarketplaceApp.Presentation.Extensions;
 
 namespace MarketplaceApp.Presentation.Factories
@@ -12,6 +13,7 @@ namespace MarketplaceApp.Presentation.Factories
             var actions = new List<IAction>()
             {
                 new ExitMenuAction(),
+                new AddProductAction(user)
             };
 
             actions.SetActionIndexes();

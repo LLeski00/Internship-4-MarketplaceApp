@@ -3,15 +3,15 @@ using MarketplaceApp.Domain.Repositories;
 using MarketplaceApp.Presentation.Abstractions;
 using MarketplaceApp.Presentation.Helpers;
 
-namespace MarketplaceApp.Presentation.Actions.Home.Users
+namespace MarketplaceApp.Presentation.Actions.Home.Customers
 {
-    public class DisplayPurchasedProductsAction : IAction
+    public class DisplayFavoritesAction : IAction
     {
-        public string Name { get; set; } = "Display purchased products";
+        public string Name { get; set; } = "Display favorite products";
         public Customer User { get; set; }
         public int MenuIndex { get; set; }
 
-        public DisplayPurchasedProductsAction(Customer user)
+        public DisplayFavoritesAction(Customer user)
         {
             User = user;
         }
@@ -19,7 +19,7 @@ namespace MarketplaceApp.Presentation.Actions.Home.Users
         public void Open()
         {
             Writer.ConsoleClear();
-            ProductRepository.DisplayPurchasedProducts(User);
+            ProductRepository.DisplayFavoriteProducts(User);
             Console.ReadLine();
         }
     }

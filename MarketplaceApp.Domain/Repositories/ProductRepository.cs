@@ -21,6 +21,17 @@ namespace MarketplaceApp.Domain.Repositories
             return null;
         }
 
+        public static ProductCategory[] GetProductCategories()
+        {
+            return (ProductCategory[])Enum.GetValues(typeof(ProductCategory));
+        }
+
+        public static void AddProduct(string name, string description, ProductCategory category, double price, Vendor owner)
+        {
+            var product = new Product(name, description, category, price, owner);
+            Context.Products.Add(product);
+        }
+
         public static void DisplayAllProducts()
         {
             if (GetAll().Where(i => i.Status == ProductStatus.OnSale) == null || GetAll().Where(i => i.Status == ProductStatus.OnSale).Count() == 0)
@@ -66,6 +77,15 @@ namespace MarketplaceApp.Domain.Repositories
         public static void DisplayProduct(Product product)
         {
             Console.WriteLine($"{product.Name}\n\tDescription: {product.Description}\n\tPrice: {product.Price} $\n\tID: {product.Id}\n\tCategory: {product.Category}\n\tAverage rating: {product.AverageRating}\n\tVendor: {product.Vendor.FirstName} {product.Vendor.LastName}");
+        }
+
+        public static void DisplayProductCategories()
+        {
+            ProductCategory[] categories = GetProductCategories();
+
+            foreach (var category in categories) {
+                Console.WriteLine(category);
+            }
         }
 
         public static Product? FindProduct()
