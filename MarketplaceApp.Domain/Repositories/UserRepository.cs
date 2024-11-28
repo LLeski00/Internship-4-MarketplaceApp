@@ -34,5 +34,18 @@ namespace MarketplaceApp.Domain.Repositories
 
             return ResponseResultType.Success;
         }
+
+        public static double GetProfitForPeriod(Vendor vendor, DateTime startDate, DateTime endDate)
+        {
+            var transactions = MarketplaceRepository.GetTransactionsInPeriod(vendor, startDate, endDate);
+            var profitForPeriod = 0.00;
+
+            foreach (var transaction in transactions) {
+                var product = ProductRepository.GetById(transaction.ProductId);
+                profitForPeriod += product.Price;
+            }
+
+            return profitForPeriod;
+        }
     }
 }

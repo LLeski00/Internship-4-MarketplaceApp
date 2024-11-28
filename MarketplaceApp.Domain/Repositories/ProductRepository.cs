@@ -1,5 +1,6 @@
 ﻿using MarketplaceApp.Data.Entities.Enums;
 using MarketplaceApp.Data.Entities.Models;
+using MarketplaceApp.Domain.Enums;
 using static MarketplaceApp.Data.Marketplace;
 
 namespace MarketplaceApp.Domain.Repositories
@@ -37,15 +38,28 @@ namespace MarketplaceApp.Domain.Repositories
             return (List<Product>)products.Where(i => i.Category == category);
         }
 
+        public static ResponseResultType ChangePrice(Product product, double newPrice)
+        {
+            if(newPrice < 0)
+            {
+                return ResponseResultType.Error;
+            }
+
+            product.Price = newPrice;
+            return ResponseResultType.Success;
+        }
+
         public static void DisplayAllProducts()
         {
-            if (GetAll().Where(i => i.Status == ProductStatus.OnSale) == null || GetAll().Where(i => i.Status == ProductStatus.OnSale).Count() == 0)
+            var products = GetAll();
+
+            if (products == null || products.Count() == 0)
             {
                 Console.WriteLine("No products!");
                 return;
             }
 
-            foreach (var product in GetAll().Where(i => i.Status == ProductStatus.OnSale))
+            foreach (var product in products)
             {
                 DisplayProduct(product);
             }
@@ -53,13 +67,15 @@ namespace MarketplaceApp.Domain.Repositories
 
         public static void DisplayAllProducts(ProductCategory category)
         {
-            if (GetAll().Where(i => i.Status == ProductStatus.OnSale && i.Category == category) == null || GetAll().Where(i => i.Status == ProductStatus.OnSale && i.Category == category).Count() == 0)
+            var products = GetAll().Where(i => i.Category == category);
+
+            if (products == null || products.Count() == 0)
             {
                 Console.WriteLine("No products!");
                 return;
             }
 
-            foreach (var product in GetAll().Where(i => i.Status == ProductStatus.OnSale && i.Category == category))
+            foreach (var product in products)
             {
                 DisplayProduct(product);
             }

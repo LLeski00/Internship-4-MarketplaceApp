@@ -18,6 +18,11 @@ namespace MarketplaceApp.Domain.Repositories
             return transactions.OrderByDescending(i => i.DateOfPurchase).First();
         }
 
+        public static List<Transaction> GetTransactionsInPeriod(User user, DateTime startDate, DateTime endDate)
+        {
+            return Context.Transactions.Where(i => i.Vendor == user && i.DateOfPurchase >= startDate && i.DateOfPurchase <= endDate).ToList();
+        }
+
         public static ResponseResultType Buy(Customer user, Product product, double discount)
         {
             var priceToPay = (product.Price * (1 - discount) + product.Price * Context.Provision);
