@@ -32,6 +32,11 @@ namespace MarketplaceApp.Domain.Repositories
             Context.Products.Add(product);
         }
 
+        public static List<Product> FilterByCategory(List<Product> products, ProductCategory category)
+        {
+            return (List<Product>)products.Where(i => i.Category == category);
+        }
+
         public static void DisplayAllProducts()
         {
             if (GetAll().Where(i => i.Status == ProductStatus.OnSale) == null || GetAll().Where(i => i.Status == ProductStatus.OnSale).Count() == 0)
@@ -41,6 +46,20 @@ namespace MarketplaceApp.Domain.Repositories
             }
 
             foreach (var product in GetAll().Where(i => i.Status == ProductStatus.OnSale))
+            {
+                DisplayProduct(product);
+            }
+        }
+
+        public static void DisplayAllProducts(ProductCategory category)
+        {
+            if (GetAll().Where(i => i.Status == ProductStatus.OnSale && i.Category == category) == null || GetAll().Where(i => i.Status == ProductStatus.OnSale && i.Category == category).Count() == 0)
+            {
+                Console.WriteLine("No products!");
+                return;
+            }
+
+            foreach (var product in GetAll().Where(i => i.Status == ProductStatus.OnSale && i.Category == category))
             {
                 DisplayProduct(product);
             }
@@ -60,6 +79,54 @@ namespace MarketplaceApp.Domain.Repositories
             }
         }
 
+        public static void DisplayVendorsProducts(Vendor owner, ProductCategory category)
+        {
+            var vendorsProducts = Context.Products.Where(i => i.Vendor == owner && i.Category == category);
+
+            if (vendorsProducts == null || vendorsProducts.Count() == 0)
+            {
+                Console.WriteLine("No products!");
+                return;
+            }
+
+            foreach (var product in vendorsProducts)
+            {
+                DisplayProduct(product);
+            }
+        }
+
+        public static void DisplayVendorsSoldProducts(Vendor owner)
+        {
+            var vendorsSoldProducts = Context.Products.Where(i => i.Vendor == owner && i.Status == ProductStatus.Sold);
+
+            if (vendorsSoldProducts == null || vendorsSoldProducts.Count() == 0)
+            {
+                Console.WriteLine("No products!");
+                return;
+            }
+
+            foreach (var product in vendorsSoldProducts)
+            {
+                DisplayProduct(product);
+            }
+        }
+
+        public static void DisplayVendorsSoldProducts(Vendor owner, ProductCategory category)
+        {
+            var vendorsSoldProducts = Context.Products.Where(i => i.Vendor == owner && i.Status == ProductStatus.Sold && i.Category == category);
+
+            if (vendorsSoldProducts == null || vendorsSoldProducts.Count() == 0)
+            {
+                Console.WriteLine("No products!");
+                return;
+            }
+
+            foreach (var product in vendorsSoldProducts)
+            {
+                DisplayProduct(product);
+            }
+        }
+
         public static void DisplayPurchasedProducts(Customer user)
         {
             if (user.PurchasedProducts == null || user.PurchasedProducts.Count() == 0)
@@ -74,6 +141,20 @@ namespace MarketplaceApp.Domain.Repositories
             }
         }
 
+        public static void DisplayPurchasedProducts(Customer user, ProductCategory category)
+        {
+            if (user.PurchasedProducts.Where(i => i.Category == category) == null || user.PurchasedProducts.Where(i => i.Category == category).Count() == 0)
+            {
+                Console.WriteLine("No products!");
+                return;
+            }
+
+            foreach (var product in user.PurchasedProducts.Where(i => i.Category == category))
+            {
+                DisplayProduct(product);
+            }
+        }
+
         public static void DisplayFavoriteProducts(Customer user)
         {
             if (user.FavoriteProducts == null || user.FavoriteProducts.Count() == 0)
@@ -83,6 +164,20 @@ namespace MarketplaceApp.Domain.Repositories
             }
 
             foreach (var product in user.FavoriteProducts)
+            {
+                DisplayProduct(product);
+            }
+        }
+
+        public static void DisplayFavoriteProducts(Customer user, ProductCategory category)
+        {
+            if (user.FavoriteProducts.Where(i => i.Category == category) == null || user.FavoriteProducts.Where(i => i.Category == category).Count() == 0)
+            {
+                Console.WriteLine("No products!");
+                return;
+            }
+
+            foreach (var product in user.FavoriteProducts.Where(i => i.Category == category))
             {
                 DisplayProduct(product);
             }

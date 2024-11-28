@@ -1,8 +1,8 @@
 ﻿using MarketplaceApp.Data.Entities.Enums;
 using MarketplaceApp.Data.Entities.Models;
-using MarketplaceApp.Domain.Enums;
 using MarketplaceApp.Domain.Repositories;
 using MarketplaceApp.Presentation.Abstractions;
+using MarketplaceApp.Presentation.Extensions;
 using MarketplaceApp.Presentation.Helpers;
 
 namespace MarketplaceApp.Presentation.Actions.Home.Vendors
@@ -60,10 +60,9 @@ namespace MarketplaceApp.Presentation.Actions.Home.Vendors
                     continue;
                 }
 
-                Console.WriteLine("All possible product categories: ");
-                ProductRepository.DisplayProductCategories();
+                var category = ActionExtensions.GetCategoryChoice();
 
-                if (!Reader.TryReadProductCategory("Enter the category: ", out var category))
+                if (category == null)
                 {
                     Writer.Error("Invalid category!");
 
@@ -73,7 +72,7 @@ namespace MarketplaceApp.Presentation.Actions.Home.Vendors
                     continue;
                 }
 
-                ProductRepository.AddProduct(name, description, (ProductCategory)Enum.Parse(typeof(ProductCategory), category), price, Vendor);
+                ProductRepository.AddProduct(name, description, (ProductCategory)category, price, Vendor);
                 Console.WriteLine("Product successfully added");
                 Console.ReadKey();
                 break;

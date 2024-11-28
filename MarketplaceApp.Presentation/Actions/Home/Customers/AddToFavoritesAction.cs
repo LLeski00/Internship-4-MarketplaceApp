@@ -1,6 +1,8 @@
-﻿using MarketplaceApp.Data.Entities.Models;
+﻿using MarketplaceApp.Data.Entities.Enums;
+using MarketplaceApp.Data.Entities.Models;
 using MarketplaceApp.Domain.Repositories;
 using MarketplaceApp.Presentation.Abstractions;
+using MarketplaceApp.Presentation.Extensions;
 using MarketplaceApp.Presentation.Helpers;
 
 namespace MarketplaceApp.Presentation.Actions.Home.Customers
@@ -19,7 +21,12 @@ namespace MarketplaceApp.Presentation.Actions.Home.Customers
         public void Open()
         {
             Writer.ConsoleClear();
-            ProductRepository.DisplayAllProducts();
+
+            if (ActionExtensions.AskFilterChoice(out var category))
+                ProductRepository.DisplayAllProducts((ProductCategory)category);
+            else
+                ProductRepository.DisplayAllProducts();
+
             var product = ProductRepository.FindProduct();
 
             while (product == null)
@@ -34,6 +41,7 @@ namespace MarketplaceApp.Presentation.Actions.Home.Customers
 
             User.FavoriteProducts.Add(product);
             Console.WriteLine("Successfully added product to favorites.");
+
             Console.ReadLine();
         }
     }

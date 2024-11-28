@@ -6,7 +6,18 @@ namespace MarketplaceApp.Domain.Repositories
 {
     public static class UserRepository
     {
-        public static User? GetUser(string email)
+        public static User? Get(User searchedUser)
+        {
+            foreach (var user in Context.Users)
+            {
+                if (user == searchedUser)
+                    return user;
+            }
+
+            return null;
+        }
+
+        public static User? GetByEmail(string email)
         {
             foreach (var user in Context.Users)
             {

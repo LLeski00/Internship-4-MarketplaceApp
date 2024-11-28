@@ -14,7 +14,9 @@ namespace MarketplaceApp.Presentation.Factories
             {
                 new ExitMenuAction(),
                 new AddProductAction(user),
-                new DisplayVendorsProductsAction(user)
+                new DisplayVendorsProductsAction(user),
+                new DisplayVendorsSoldProductsAction(user),
+                new DisplayProfitAction(user),
             };
 
             actions.SetActionIndexes();

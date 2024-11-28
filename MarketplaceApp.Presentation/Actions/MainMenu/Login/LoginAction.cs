@@ -43,7 +43,7 @@ namespace MarketplaceApp.Presentation.Actions.MainMenu.Login
                 return null;
             }
 
-            User? user = UserRepository.GetUser(email);
+            User? user = UserRepository.GetByEmail(email);
             return user;
         }
     }

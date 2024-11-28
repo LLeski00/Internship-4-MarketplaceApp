@@ -1,5 +1,7 @@
-﻿using MarketplaceApp.Domain.Repositories;
+﻿using MarketplaceApp.Data.Entities.Enums;
+using MarketplaceApp.Domain.Repositories;
 using MarketplaceApp.Presentation.Abstractions;
+using MarketplaceApp.Presentation.Extensions;
 using MarketplaceApp.Presentation.Helpers;
 
 namespace MarketplaceApp.Presentation.Actions.Home.Products
@@ -12,7 +14,12 @@ namespace MarketplaceApp.Presentation.Actions.Home.Products
         public void Open()
         {
             Writer.ConsoleClear();
-            ProductRepository.DisplayAllProducts();
+
+            if (ActionExtensions.AskFilterChoice(out var category))
+                ProductRepository.DisplayAllProducts((ProductCategory)category);
+            else
+                ProductRepository.DisplayAllProducts();
+
             Console.ReadLine();
         }
     }

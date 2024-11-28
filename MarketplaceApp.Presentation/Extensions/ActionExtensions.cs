@@ -75,6 +75,47 @@ namespace MarketplaceApp.Presentation.Extensions
             }
         }
 
-        
+        public static bool AskFilterChoice(out ProductCategory? category)
+        {
+            Console.WriteLine("Press y if you want to filter the display by category:");
+
+            var filterOption = Console.ReadLine();
+
+            if (filterOption != null && filterOption != string.Empty && filterOption.Equals("y", StringComparison.OrdinalIgnoreCase))
+            {
+                do
+                {
+                    category = GetCategoryChoice();
+
+                    if (category == null)
+                    {
+                        Writer.Error("Invalid category!");
+
+                        if (Reader.DoYouWantToContinue())
+                            continue;
+
+                        return false;
+                    }
+
+                    return true;
+                } while (true);
+            }
+
+            category = null;
+            return false;
+        }
+
+        public static ProductCategory? GetCategoryChoice()
+        {
+            Console.WriteLine("All possible product categories: ");
+            ProductRepository.DisplayProductCategories();
+
+            if (!Reader.TryReadProductCategory("Enter the category: ", out var category))
+            {
+                return null;
+            }
+
+            return (ProductCategory)Enum.Parse(typeof(ProductCategory), category);
+        }
     }
 }

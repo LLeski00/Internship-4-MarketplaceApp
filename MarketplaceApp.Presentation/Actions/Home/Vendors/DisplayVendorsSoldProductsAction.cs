@@ -4,17 +4,22 @@ using MarketplaceApp.Domain.Repositories;
 using MarketplaceApp.Presentation.Abstractions;
 using MarketplaceApp.Presentation.Extensions;
 using MarketplaceApp.Presentation.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace MarketplaceApp.Presentation.Actions.Home.Vendors
 {
-    public class DisplayVendorsProductsAction : IAction
+    public class DisplayVendorsSoldProductsAction : IAction
     {
 
-        public string Name { get; set; } = "Display your products";
+        public string Name { get; set; } = "Display your sold products";
         public Vendor Vendor { get; set; }
         public int MenuIndex { get; set; }
 
-        public DisplayVendorsProductsAction(Vendor vendor)
+        public DisplayVendorsSoldProductsAction(Vendor vendor)
         {
             Vendor = vendor;
         }
@@ -24,9 +29,9 @@ namespace MarketplaceApp.Presentation.Actions.Home.Vendors
             Writer.ConsoleClear();
 
             if (ActionExtensions.AskFilterChoice(out var category))
-                ProductRepository.DisplayVendorsProducts(Vendor, (ProductCategory)category);
+                ProductRepository.DisplayVendorsSoldProducts(Vendor, (ProductCategory)category);
             else
-                ProductRepository.DisplayVendorsProducts(Vendor);
+                ProductRepository.DisplayVendorsSoldProducts(Vendor);
 
             Console.ReadLine();
         }

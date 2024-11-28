@@ -50,7 +50,7 @@ namespace MarketplaceApp.Presentation.Helpers
                 return false;
             }
 
-            string[] inputSplitByTheDot = email.Split(".");
+            string[] inputSplitByTheDot = inputSplitByMonkey[1].Split(".");
 
             if (inputSplitByTheDot.Length != 2 || inputSplitByTheDot[0].Length < 3 || inputSplitByTheDot[1].Length < 2)
             {

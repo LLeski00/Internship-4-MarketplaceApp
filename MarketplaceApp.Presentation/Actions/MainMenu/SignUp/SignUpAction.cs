@@ -47,7 +47,7 @@ namespace MarketplaceApp.Presentation.Actions.MainMenu.SignUp
                     continue;
                 }
 
-                if (UserRepository.GetUser(email) != null)
+                if (UserRepository.GetByEmail(email) != null)
                 {
                     Writer.Error("This email is already taken.");
 
