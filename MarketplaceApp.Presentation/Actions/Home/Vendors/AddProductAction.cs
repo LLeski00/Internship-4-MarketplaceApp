@@ -50,9 +50,9 @@ namespace MarketplaceApp.Presentation.Actions.Home.Vendors
 
                 Console.WriteLine("Enter the price you wish to sell the product for:");
 
-                if (!double.TryParse(Console.ReadLine(), out var price))
+                if (!double.TryParse(Console.ReadLine(), out var price) || price < 0)
                 {
-                    Writer.Error("Not a number!");
+                    Writer.Error("Invalid price!");
 
                     if (!Reader.DoYouWantToContinue())
                         break;
@@ -62,7 +62,17 @@ namespace MarketplaceApp.Presentation.Actions.Home.Vendors
 
                 Console.WriteLine("All possible product categories: ");
                 ProductRepository.DisplayProductCategories();
-                Reader.TryReadProductCategory("Enter the category: ", out var category);
+
+                if (!Reader.TryReadProductCategory("Enter the category: ", out var category))
+                {
+                    Writer.Error("Invalid category!");
+
+                    if (!Reader.DoYouWantToContinue())
+                        break;
+
+                    continue;
+                }
+
                 ProductRepository.AddProduct(name, description, (ProductCategory)Enum.Parse(typeof(ProductCategory), category), price, Vendor);
                 Console.WriteLine("Product successfully added");
                 Console.ReadKey();

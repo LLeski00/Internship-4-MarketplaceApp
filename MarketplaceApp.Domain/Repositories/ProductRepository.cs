@@ -46,6 +46,20 @@ namespace MarketplaceApp.Domain.Repositories
             }
         }
 
+        public static void DisplayVendorsProducts(Vendor owner)
+        {
+            var vendorsProducts = Context.Products.Where(i => i.Vendor == owner);
+
+            if (vendorsProducts == null || vendorsProducts.Count() == 0) {
+                Console.WriteLine("No products!");
+                return;
+            }
+
+            foreach (var product in vendorsProducts) {
+                DisplayProduct(product);
+            }
+        }
+
         public static void DisplayPurchasedProducts(Customer user)
         {
             if (user.PurchasedProducts == null || user.PurchasedProducts.Count() == 0)
@@ -76,7 +90,7 @@ namespace MarketplaceApp.Domain.Repositories
 
         public static void DisplayProduct(Product product)
         {
-            Console.WriteLine($"{product.Name}\n\tDescription: {product.Description}\n\tPrice: {product.Price} $\n\tID: {product.Id}\n\tCategory: {product.Category}\n\tAverage rating: {product.AverageRating}\n\tVendor: {product.Vendor.FirstName} {product.Vendor.LastName}");
+            Console.WriteLine($"{product.Name}\n\tDescription: {product.Description}\n\tSelling Price: {product.Price} $\n\tID: {product.Id}\n\tCategory: {product.Category}\n\tStatus: {product.Status}\n\tVendor: {product.Vendor.FirstName} {product.Vendor.LastName}");
         }
 
         public static void DisplayProductCategories()
