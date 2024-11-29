@@ -22,6 +22,12 @@ namespace MarketplaceApp.Presentation.Actions.Home.Customers
         {
             Writer.ConsoleClear();
 
+            if (User.PurchasedProducts == null || User.PurchasedProducts.Count() == 0) {
+                Console.WriteLine("No products!");
+                Console.ReadLine();
+                return;
+            }
+
             if (ActionExtensions.AskFilterChoice(out var category))
                 ProductRepository.DisplayPurchasedProducts(User, (ProductCategory)category);
             else

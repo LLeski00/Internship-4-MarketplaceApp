@@ -6,9 +6,9 @@ using MarketplaceApp.Presentation.Helpers;
 
 namespace MarketplaceApp.Presentation.Actions.Home.Products
 {
-    public class DisplayProductsOnSaleAction : IAction
+    public class DisplayAllProductsAction : IAction
     {
-        public string Name { get; set; } = "Display products on sale";
+        public string Name { get; set; } = "Display all products";
         public int MenuIndex { get; set; }
 
         public void Open()

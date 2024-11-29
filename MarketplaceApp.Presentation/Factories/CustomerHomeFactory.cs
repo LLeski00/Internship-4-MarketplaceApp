@@ -14,7 +14,7 @@ namespace MarketplaceApp.Presentation.Factories
             var actions = new List<IAction>()
             {
                 new ExitMenuAction(),
-                new DisplayProductsOnSaleAction(),
+                new DisplayAllProductsAction(),
                 new DisplayPurchasedProductsAction(user),
                 new DisplayFavoritesAction(user),
                 new AddToFavoritesAction(user),

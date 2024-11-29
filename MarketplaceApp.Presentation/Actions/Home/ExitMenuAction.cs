@@ -1,5 +1,4 @@
 ﻿using MarketplaceApp.Presentation.Abstractions;
-using MarketplaceApp.Data.Entities.Models;
 
 namespace MarketplaceApp.Presentation.Actions.Home
 {

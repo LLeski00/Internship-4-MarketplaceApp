@@ -1,6 +1,4 @@
-﻿using MarketplaceApp.Data.Entities.Enums;
-
-namespace MarketplaceApp.Data.Entities.Models
+﻿namespace MarketplaceApp.Data.Entities.Models
 {
     public class Transaction
     {

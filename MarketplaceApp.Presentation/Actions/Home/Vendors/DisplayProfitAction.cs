@@ -1,5 +1,4 @@
 ﻿using MarketplaceApp.Data.Entities.Models;
-using MarketplaceApp.Domain.Repositories;
 using MarketplaceApp.Presentation.Abstractions;
 using MarketplaceApp.Presentation.Helpers;
 

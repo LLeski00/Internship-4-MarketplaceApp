@@ -1,6 +1,4 @@
-﻿using MarketplaceApp.Data.Entities.Models;
-
-namespace MarketplaceApp.Presentation.Abstractions
+﻿namespace MarketplaceApp.Presentation.Abstractions
 {
     public interface IAction
     {

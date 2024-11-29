@@ -11,7 +11,6 @@ namespace MarketplaceApp.Data.Entities.Models
         public double Price { get; set; }
         public ProductStatus Status { get; set; }
         public Vendor Vendor { get; set; }
-        public double AverageRating { get; set; }
 
         public Product(string name, string description, ProductCategory category, double price, Vendor vendor) { 
             Id = Guid.NewGuid();
@@ -21,7 +20,6 @@ namespace MarketplaceApp.Data.Entities.Models
             Price = price;
             Status = ProductStatus.OnSale;
             Vendor = vendor;
-            AverageRating = 1.00;
         }
     }
 }
